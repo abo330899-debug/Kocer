@@ -1,0 +1,28 @@
+/*Gridview Center*/
+
+table {
+    max-width: 100%;
+    background-color: transparent;
+    text-align: center;
+}
+
+th {
+    text-align: center !important;
+}
+
+::-webkit-input-placeholder {
+    text-align: center;
+}
+
+.table {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+table caption {
+    font-family: 'Sakkal Majalla';
+    font-size: 20px;
+    font-weight: bolder;
+    color: black;
+    text-align: right;
+}
