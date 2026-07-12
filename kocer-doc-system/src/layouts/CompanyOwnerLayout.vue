@@ -32,6 +32,7 @@ const props = defineProps({
 })
 
 function handleLogout() {
+  localStorage.removeItem('user')
   localStorage.removeItem('company_data')
   router.push('/')
 }

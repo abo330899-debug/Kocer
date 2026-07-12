@@ -1,6 +1,12 @@
 import axios from 'axios'
+
 const api = axios.create({ baseURL: '/api', headers: { 'Content-Type': 'application/json' } })
-export function fetchCompanyByHash(hashCode) { return api.get(`/company/${hashCode}`) }
+
+export function fetchCompanyByHash(hashCode) {
+  const normalizedHash = String(hashCode || '').trim()
+  return api.get(`/company/${encodeURIComponent(normalizedHash)}`)
+}
+
 export function submitShipmentRequest(companyId, items) { return api.post('/document/create', { company_id: companyId, items }) }
 export function regenerateDocQR(docNumber) { return api.post('/document/return-doc-qrcode', { doc_number: docNumber }) }
 export function fetchCompanyDoc(docNumber) { return api.get(`/document/return-company-doc/${docNumber}`) }

@@ -39,7 +39,8 @@ async function handleLogin() {
   loading.value = true
   try {
     await new Promise(resolve => setTimeout(resolve, 800))
-    localStorage.setItem('user', JSON.stringify({ username: username.value, name: 'صاحب الشركة' }))
+    const userData = { username: username.value || 'company-owner', name: 'صاحب الشركة' }
+    localStorage.setItem('user', JSON.stringify(userData))
     router.push('/company-owner')
   } catch {
     error.value = 'فشل تسجيل الدخول. تحقق من بيانات الدخول.'

@@ -24,9 +24,15 @@ function generateFakeQR(data) {
 
 router.get('/company/:hash', (req, res) => {
   const db = readDB()
-  const company = db.companies.find(c => c.hash === req.params.hash)
+  const searchHash = String(req.params.hash || '').trim().toLowerCase()
+  const company = db.companies.find(c => String(c.hash || '').trim().toLowerCase() === searchHash)
+
   if (!company) return res.status(404).json({ error: 'Company not found' })
-  res.json({ company: { id: company.id, name: company.name, code: company.code, hash: company.hash }, items: company.items })
+
+  res.json({
+    company: { id: company.id, name: company.name, code: company.code, hash: company.hash },
+    items: company.items || []
+  })
 })
 
 router.post('/document/create', (req, res) => {
