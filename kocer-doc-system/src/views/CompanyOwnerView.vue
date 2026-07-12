@@ -2,8 +2,17 @@
   <CompanyOwnerLayout :company-name="companyData?.name" :user-name="user?.name">
     <div v-if="step === 'hash'" class="step-container">
       <div class="step-card">
-        <h3>إدخال رمز الشركة (Hash Code)</h3>
-        <p class="step-desc">أدخل رمز Hash Code الخاص بشركتك للبدء</p>
+        <div class="section-header">
+          <div>
+            <h3>إدخال رمز الشركة (Hash Code)</h3>
+            <p class="step-desc">أدخل رمز Hash Code الخاص بشركتك للبدء</p>
+          </div>
+          <div class="quick-links">
+            <router-link class="btn btn-outline" to="/qr/document">عرض الوثيقة</router-link>
+            <router-link class="btn btn-outline" to="/qr/local">QR محلي</router-link>
+            <router-link class="btn btn-outline" to="/qr/imported">QR مستورد</router-link>
+          </div>
+        </div>
         <div class="form-group">
           <input v-model="hashCode" type="text" placeholder="أدخل Hash Code" class="form-input ltr-input" @keyup.enter="fetchCompany" />
         </div>
@@ -16,6 +25,11 @@
         <div class="company-info-bar">
           <span><strong>الشركة:</strong> {{ companyData?.name }}</span>
           <span><strong>رمز الشركة:</strong> {{ companyData?.code }}</span>
+          <div class="quick-links compact-links">
+            <router-link class="btn btn-outline" to="/qr/health-certificate">شهادة صحية</router-link>
+            <router-link class="btn btn-outline" to="/qr/readings">قراءات</router-link>
+            <router-link class="btn btn-outline" to="/qr/checkpoints">نقاط تفتيش</router-link>
+          </div>
         </div>
         <h3>المنتجات والمواد</h3>
         <p class="step-desc">حدد الكمية المطلوبة لكل منتج</p>
@@ -134,9 +148,12 @@ function goBackToItems() { step.value = 'items' }
 <style scoped>
 .step-container { display: flex; justify-content: center; padding: 24px 0; }
 .step-card { background: #fff; border-radius: 10px; padding: 32px; width: 100%; max-width: 700px; box-shadow: 0 2px 12px rgba(0,0,0,0.08); }
+.section-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; margin-bottom: 20px; }
+.quick-links { display: flex; flex-wrap: wrap; gap: 8px; }
+.compact-links { margin-right: auto; }
 .step-card h3 { margin: 0 0 4px; color: #1a5276; font-size: 18px; }
 .step-desc { margin: 0 0 20px; color: #666; font-size: 13px; }
-.company-info-bar { display: flex; gap: 24px; padding: 12px 16px; background: #eaf2f8; border-radius: 6px; margin-bottom: 20px; font-size: 14px; }
+.company-info-bar { display: flex; align-items: center; gap: 24px; padding: 12px 16px; background: #eaf2f8; border-radius: 6px; margin-bottom: 20px; font-size: 14px; flex-wrap: wrap; }
 .ltr-input { direction: ltr; text-align: left; font-family: monospace; letter-spacing: 2px; }
 .items-grid { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
 .item-row { display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; background: #f9f9f9; border: 1px solid #eee; border-radius: 6px; }

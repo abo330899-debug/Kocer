@@ -7,10 +7,10 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const router = Router()
 
 function readDB() {
-  return JSON.parse(fs.readFileSync(path.join(__dirname, '../data/db.json'), 'utf-8'))
+  return JSON.parse(fs.readFileSync(path.join(__dirname, '../data/companies.json'), 'utf-8'))
 }
 function writeDB(data) {
-  fs.writeFileSync(path.join(__dirname, '../data/db.json'), JSON.stringify(data, null, 2), 'utf-8')
+  fs.writeFileSync(path.join(__dirname, '../data/companies.json'), JSON.stringify(data, null, 2), 'utf-8')
 }
 
 function generateFakeQR(data) {
