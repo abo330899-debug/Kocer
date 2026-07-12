@@ -1,0 +1,38 @@
+{
+  "companies": [
+    {
+      "id": 1,
+      "name": "شركة النخبة للتجارة العامة",
+      "code": "NOKHBA-001",
+      "hash": "ABC123XYZ",
+      "items": [
+        { "item_name": "حديد تسليح", "production_capacity": 5000, "unit": "كغم" },
+        { "item_name": "أسمنت بورتلاندي", "production_capacity": 10000, "unit": "كغم" },
+        { "item_name": "خشب بناء", "production_capacity": 200, "unit": "م³" }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "شركة الرافدين للمواد الغذائية",
+      "code": "RAFID-002",
+      "hash": "DEF456UVW",
+      "items": [
+        { "item_name": "رز بسمتي", "production_capacity": 2000, "unit": "كغم" },
+        { "item_name": "زيت طعام", "production_capacity": 1000, "unit": "لتر" },
+        { "item_name": "سكر أبيض", "production_capacity": 3000, "unit": "كغم" }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "شركة دجلة للإلكترونيات",
+      "code": "DJLA-003",
+      "hash": "GHI789RST",
+      "items": [
+        { "item_name": "أجهزة تلفاز", "production_capacity": 100, "unit": "جهاز" },
+        { "item_name": "مكيفات هواء", "production_capacity": 50, "unit": "جهاز" },
+        { "item_name": "غسالات", "production_capacity": 75, "unit": "جهاز" }
+      ]
+    }
+  ],
+  "documents": []
+}
