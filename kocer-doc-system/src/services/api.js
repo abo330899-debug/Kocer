@@ -2,9 +2,9 @@ import axios from 'axios'
 
 const api = axios.create({ baseURL: '/api', headers: { 'Content-Type': 'application/json' } })
 
-export function fetchCompanyByHash(hashCode) {
-  const normalizedHash = String(hashCode || '').trim()
-  return api.get(`/company/${encodeURIComponent(normalizedHash)}`)
+export function fetchCompanyByNumber(companyNumber) {
+  const normalizedNumber = String(companyNumber || '').trim()
+  return api.get(`/company/${encodeURIComponent(normalizedNumber)}`)
 }
 
 export function submitShipmentRequest(companyId, items) { return api.post('/document/create', { company_id: companyId, items }) }

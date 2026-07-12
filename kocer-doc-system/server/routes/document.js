@@ -22,12 +22,20 @@ function generateFakeQR(data) {
   return b64 + '='.repeat(Math.max(0, 80 - b64.length))
 }
 
-router.get('/company/:hash', (req, res) => {
+router.get('/company/:id', (req, res) => {
   const db = readDB()
-  const searchHash = String(req.params.hash || '').trim().toLowerCase()
-  const company = db.companies.find(c => String(c.hash || '').trim().toLowerCase() === searchHash)
+  const companyId = Number(req.params.id)
 
-  if (!company) return res.status(404).json({ error: 'Company not found' })
+  if (!Number.isInteger(companyId) || companyId < 1) {
+    return res.status(400).json({ error: 'Company number must be a positive integer' })
+  }
+
+  const company = db.companies.find(c => Number(c.id) === companyId)
+  const availableIds = (db.companies || []).map(c => Number(c.id)).filter(Boolean).sort((a, b) => a - b)
+
+  if (!company) {
+    return res.status(404).json({ error: 'Company not found', availableIds })
+  }
 
   res.json({
     company: { id: company.id, name: company.name, code: company.code, hash: company.hash },

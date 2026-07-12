@@ -4,8 +4,8 @@
       <div class="step-card">
         <div class="section-header">
           <div>
-            <h3>إدخال رمز الشركة (Hash Code)</h3>
-            <p class="step-desc">أدخل رمز Hash Code الخاص بشركتك للبدء</p>
+            <h3>إدخال رقم الشركة</h3>
+            <p class="step-desc">أدخل رقم الشركة الموجود داخل ملف companies.json للبدء</p>
           </div>
           <div class="quick-links">
             <router-link class="btn btn-outline" to="/qr/document">عرض الوثيقة</router-link>
@@ -14,7 +14,7 @@
           </div>
         </div>
         <div class="form-group">
-          <input v-model="hashCode" type="text" placeholder="أدخل Hash Code" class="form-input ltr-input" @keyup.enter="fetchCompany" />
+          <input v-model="companyNumber" type="number" min="1" placeholder="أدخل رقم الشركة" class="form-input ltr-input" @keyup.enter="fetchCompany" />
         </div>
         <button class="btn btn-primary" @click="fetchCompany" :disabled="fetching">{{ fetching ? 'جاري البحث...' : 'بحث' }}</button>
         <p v-if="hashError" class="error-msg">{{ hashError }}</p>
@@ -67,11 +67,11 @@
 import { ref } from 'vue'
 import CompanyOwnerLayout from '../layouts/CompanyOwnerLayout.vue'
 import ShipmentDoc from '../components/ShipmentDoc.vue'
-import { fetchCompanyByHash, submitShipmentRequest, regenerateDocQR } from '../services/api.js'
+import { fetchCompanyByNumber, submitShipmentRequest, regenerateDocQR } from '../services/api.js'
 
 const user = ref(JSON.parse(localStorage.getItem('user') || '{}'))
 const step = ref('hash')
-const hashCode = ref('')
+const companyNumber = ref('')
 const fetching = ref(false)
 const hashError = ref('')
 const companyData = ref(null)
@@ -84,14 +84,19 @@ const regenerateMsg = ref('')
 const regenerateError = ref('')
 
 async function fetchCompany() {
-  if (!hashCode.value.trim()) { hashError.value = 'الرجاء إدخال Hash Code'; return }
+  const rawNumber = Number(companyNumber.value)
+  if (!Number.isInteger(rawNumber) || rawNumber < 1) {
+    hashError.value = 'الرجاء إدخال رقم شركة صحيح أكبر من 0'
+    return
+  }
+
   hashError.value = ''; fetching.value = true
   try {
-    const res = await fetchCompanyByHash(hashCode.value.trim())
+    const res = await fetchCompanyByNumber(rawNumber)
     companyData.value = res.data.company
     companyItems.value = (res.data.items || []).map(item => ({ ...item, quantity: 0 }))
     step.value = 'items'
-  } catch { hashError.value = 'لم يتم العثور على شركة بهذا الرمز' }
+  } catch { hashError.value = 'لم يتم العثور على شركة بهذا الرقم' }
   finally { fetching.value = false }
 }
 

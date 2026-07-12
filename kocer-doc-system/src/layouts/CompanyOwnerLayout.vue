@@ -36,7 +36,9 @@ const navItems = [
   { to: '/qr/local', label: 'QR محلي' },
   { to: '/qr/imported', label: 'QR مستورد' },
   { to: '/qr/health-certificate', label: 'شهادة صحية' },
+  { to: '/qr/readers', label: 'قارئ QR' },
   { to: '/qr/readings', label: 'قراءات' },
+  { to: '/qr/control-scan', label: 'قراءات السيطرة' },
   { to: '/qr/checkpoints', label: 'نقاط تفتيش' },
   { to: '/qr/disable', label: 'تعطيل' }
 ]
